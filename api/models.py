@@ -91,8 +91,11 @@ class FAQs(models.Model):
     def __str__(self):
         return self.question[:50]
     
-#blog model 
 
+#-------------------------------------------------------------------------------------------------------
+
+
+# blog models
 
 from froala_editor.fields import FroalaField
 from django.contrib.auth import get_user_model
@@ -103,7 +106,7 @@ from django.db.models.signals import pre_save
 User = get_user_model()
 
 class Blog(models.Model):
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True, null=True)
     title = models.CharField(max_length=500)
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
     content = FroalaField()
@@ -144,8 +147,10 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
 
-
 pre_save.connect(pre_save_post_receiver, sender=Blog)
+
+
+
 
 class Comment(models.Model):
     parent = models.ForeignKey(Blog, on_delete=models.CASCADE)

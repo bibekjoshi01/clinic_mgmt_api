@@ -31,6 +31,10 @@ class TestimonialModelViewSet(viewsets.ModelViewSet):
     serializer_class = TestimonialSerializer
 
 class AccreditationModelViewSet(viewsets.ModelViewSet):
+    '''
+        This is Accreditation API
+    '''
+
     queryset = Accreditation.objects.all()
     serializer_class = AccreditationSerializer
 

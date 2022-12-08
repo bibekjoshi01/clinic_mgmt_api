@@ -14,7 +14,6 @@ router.register('accreditationapi', views.AccreditationModelViewSet)
 router.register('faqsapi', views.FAQsModelViewSet)
 
 
-
 urlpatterns = [
     path('', include(router.urls)),
     path('contactapi', views.ContactView.as_view()),
@@ -34,9 +33,11 @@ urlpatterns = [
         name="comment_detail",
     ),
 
-
 #     class based urls
 #    path('serviceapi/', views.ServiceAPI.as_view()),
 #    path('serviceapi/<int:pk>/', views.ServiceAPI.as_view()),
 
 ]
+
+
+

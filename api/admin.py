@@ -12,7 +12,5 @@ admin.site.register(Payment_Method)
 admin.site.register(FAQs)
 
 
-#blog
-admin.site.register(Blog)
-admin.site.register(Comment)
+
 

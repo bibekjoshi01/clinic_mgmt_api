@@ -5,14 +5,15 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
 
+
 User = get_user_model()
 
 class Blog(models.Model):
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True, null=True)
     title = models.CharField(max_length=500)
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
     content = FroalaField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1, related_name="author")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -49,8 +50,10 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
 
-
 pre_save.connect(pre_save_post_receiver, sender=Blog)
+
+
+
 
 class Comment(models.Model):
     parent = models.ForeignKey(Blog, on_delete=models.CASCADE)
